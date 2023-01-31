@@ -1,9 +1,12 @@
 import axios from 'axios'
-export async function login() {
+export async function login(user) {
     try {
-        await axios.post('http://localhost:3000/');
-    } catch(err){
-        console.log('sdksjkhsl', err);
+      const response= await axios.post('http://localhost:3000/', user);
+      console.log("Here")
+      return response.data;
+
+
+    } catch (err) {
+        console.log('err', err);
     }
-    // return response.data;
 }

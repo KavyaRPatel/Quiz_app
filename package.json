@@ -14,6 +14,7 @@
     "bootstrap-vue": "^2.23.1",
     "core-js": "^3.8.3",
     "cors": "^2.8.5",
+    "jsonwebtoken": "^9.0.0",
     "nodemon": "^2.0.20",
     "vue": "^2.6.14",
     "vue-router": "^3.6.5"
@@ -41,7 +42,9 @@
       "parser": "@babel/eslint-parser"
     },
     "rules": {
-      "vue/multi-word-component-names": "off"
+      "vue/multi-word-component-names": "off",
+      "vue/no-unused-components": "off",
+      "strict": "off"
     }
   },
   "browserslist": [

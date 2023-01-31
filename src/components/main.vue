@@ -1,7 +1,6 @@
 <template>
     <div>
         <app-login></app-login>
-
     </div>
 </template>
 

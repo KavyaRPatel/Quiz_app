@@ -6,7 +6,7 @@ import VueRouter from 'vue-router'
 //import VueResource from 'vue-resource';
 import Bootstrap from'bootstrap/dist/css/bootstrap.css'
 import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.css'
-import Routes from './routes';
+import Routes from '../routes';
 
 Vue.config.productionTip = false
 Vue.use(BootstrapVue);

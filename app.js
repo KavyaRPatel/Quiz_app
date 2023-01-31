@@ -1,11 +1,9 @@
 var express = require("express");
 var app = express();
+const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const bodyparser = require("body-parser");
-const { v4: uuidv4 } = require("uuid");
 const { response } = require("express");
-const todos = []
-var router = express.Router();
 
 
 
@@ -39,17 +37,52 @@ const credential = {
 
 
 
-app.post('/', async (req, res) => {
+app.post('/', (req, res) => {
     try {
-        const name=req.body.username
-        const password=req.body.password
-        res.send('good')
+        const name = req.body.username
+        const password = req.body.password
+        console.log(name, password) //works
+        // res.send('good')
+
+        const token = jwt.sign({ name: name }, 'secretkey');
+        res.status(200).json({
+            message: 'ok',
+            title: 'login success',
+            token: token
+        })
+
+
     } catch (err) {
         console.log(err.message);
 
     }
 
 })
+
+app.use((req, res, next) => {
+    const token = req.headers["authorization"];
+  
+    if (token) {
+      jwt.verify(token, 'secetKey', (error, decoded) => {
+        if (error) {
+          return res.status(401).json({
+            message: "Unauthorized"
+          });
+        }
+  
+        req.user = decoded;
+        next();
+      });
+    } else {
+      return res.status(401).json({
+        message: "Unauthorized"
+      });
+    }
+  });
+  
+  
+  
+  
 
 
 

@@ -23,26 +23,33 @@
 </template>
 
 <script>
-import { login }from '../../service.js'
+import { login } from '../../service.js'
 export default {
     data() {
         return {
             username: '',
             password: '',
-            submitted:false
+            submitted: false
         }
     },
-    methods:{
-        async login1() {
-            let user={
+    methods: {
+         login1() {
+            let user = {
                 username: this.username,
                 password: this.password
             }
-            console.log(user);
-            await login(user)
-            // login(user).then(()=>{
+            //console.log(user);
+            login(user).then((response) => {
+                    localStorage.setItem('token', response.token);
+                    this.$router.push('/quiz');
 
-            // })
+
+
+            }, err => {
+                console.log(err.response);
+                this.error = err.response.data.error
+            })
+
         }
     }
 
