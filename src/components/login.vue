@@ -14,10 +14,10 @@
                 <div v-show="submitted && !password" class="invalid-feedback">Password is required</div>
             </div>
             <div class="form-group">
-                <button v-on:click="login1" class="btn btn-primary" type="submit">Login</button>
+                <button v-on:click="login2" class="btn btn-primary" type="submit">Login</button>
 
             </div>
-            <!-- <label v-if="error" class="alert alert-danger">Incorrect Username or Password</label> -->
+            <label v-if="error" class="alert alert-danger">Incorrect Username or Password</label> 
         </form>
     </div>
 </template>
@@ -39,6 +39,7 @@ export default {
                 password: this.password
             }
             //console.log(user);
+        
             login(user).then((response) => {
                     localStorage.setItem('token', response.token);
                     this.$router.push('/quiz');
