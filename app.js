@@ -28,11 +28,6 @@ app.use(function (req, res, next) {
   next();
 })
 
-const credential = {
-  username: "admin",
-  password: "admin"
-}
-
 
 
 

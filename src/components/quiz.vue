@@ -3,10 +3,13 @@
         <h4>Quiz App</h4>
         <section class="quiz">
             <div class="quiz_info">
-                <span>score {{ score }}/{{ questions.length }}</span>
+                <span class="score">Score {{ score }}/{{ questions.length }}</span>
+                <span class="questions"> {{ getQuestion.question }}</span>
+
 
                 <div class="option">
-                    <label >
+                    <label v-for="(options,index) in getQuestion.options" :key="index" >
+                        <input type="radio" name="getQuestion.index" value="index">
 
                     </label>
                 </div>
@@ -16,7 +19,7 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { ref, computed } from 'vue';
 
 const questions = ref([
@@ -44,23 +47,30 @@ const questions = ref([
 ])
 const currentQuestion = ref(0);
 const score = computed(() => {
-    let value = 0
+    let count = 0
     questions.value.map(q => {
         if (q.selected = !null && q.selected == q.answer) {
-            value++;
+            count++;
         }
     })
-    return value;
+    return count;
 })
 
-const NextQuestion = () => {
-	if (currentQuestion.value < questions.value.length - 1) {
-		currentQuestion.value++
-		return
-	}
+// const NextQuestion = () => {
+// 	if (currentQuestion.value < questions.value.length - 1) {
+// 		currentQuestion.value++
+// 		return value
+// 	}
 	
-	quizCompleted.value = true
-}
+// 	quizCompleted.value = true
+// }
+
+ const getQuestion=computed(()=>{
+    let question = questions.value[currentQuestion.value];
+    question.index = currentQuestion.value;
+    return question;    
+    
+})
 
 
 </script>
