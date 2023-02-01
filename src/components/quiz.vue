@@ -8,8 +8,12 @@
 
                 <div class="option">
                     <label v-for="questions in question" :key="questions">
-                        <input type="radio" name="getQuestion.index" value="index">
-                        <span>{{ questions.question }}</span>
+                        <input type="radio" name="" value="index">
+                        <p>{{ questions.ques }}</p>
+                        <p>{{ questions.option1 }}</p>
+                        <p>{{ questions.option2 }}</p>
+                        <p>{{ questions.option3 }}</p>
+                        
 
                     </label>
                     <button class="btn btn-info">Next</button>
@@ -21,13 +25,21 @@
 </template>
 
 <script >
+import {display} from '../../service'
 export default{
     data(){
     return{
         question:[]
 
     }
-}
+},
+created() {
+      display().then((response) => {
+
+        this.question = response;
+
+      })
+    }
 }
 
 

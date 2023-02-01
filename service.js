@@ -23,4 +23,15 @@ export async function addQuiz(quiz) {
       console.log('err', err);
   }
 }
+export async function display() {
+  try {
+    const response= await axios.get('http://localhost:3000/quiz');
+    console.log("Here in services")
 
+    return response.data;
+
+
+  } catch (err) {
+      console.log('err', err);
+  }
+}

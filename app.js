@@ -45,8 +45,14 @@ app.post('/add', async (req, res) => {
   }
 
 }
-
 )
+app.get('/quiz', async (req, res) => {
+const ques=await pool.query("SELECT * FROM question")
+res.json(ques.rows)
+
+})
+
+
 
 
 app.post('/', (req, res) => {
