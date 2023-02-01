@@ -3,15 +3,16 @@
         <h4>Quiz App</h4>
         <section class="quiz">
             <div class="quiz_info">
-                <span class="score">Score {{ score }}/{{ questions.length }}</span>
-                <span class="questions"> {{ getQuestion.question }}</span>
+                <!-- <span class="score">Score {{ score }}/{{ questions.length }}</span> -->
 
 
                 <div class="option">
-                    <label v-for="(options,index) in getQuestion.options" :key="index" >
+                    <label v-for="questions in question" :key="questions">
                         <input type="radio" name="getQuestion.index" value="index">
+                        <span>{{ questions.question }}</span>
 
                     </label>
+                    <button class="btn btn-info">Next</button>
                 </div>
             </div>
         </section>
@@ -19,62 +20,103 @@
     </div>
 </template>
 
-<script setup>
-import { ref, computed } from 'vue';
+<script >
+export default{
+    data(){
+    return{
+        question:[]
 
-const questions = ref([
-    {
-        question: 'What is the shortcut for Copy?',
-        answer: 0,
-        options: [
-            'Ctrl+C',
-            'Ctrl+V',
-            'Ctrl+P'
-        ],
-        selected: null
-    },
-
-    {
-        question: 'What is capital of India?',
-        answer: 2,
-        options: [
-            'Gujarat',
-            'Rajasthan',
-            'Delhi'
-        ],
-        selected: null
     }
-])
-const currentQuestion = ref(0);
-const score = computed(() => {
-    let count = 0
-    questions.value.map(q => {
-        if (q.selected = !null && q.selected == q.answer) {
-            count++;
-        }
-    })
-    return count;
-})
+}
+}
 
-// const NextQuestion = () => {
-// 	if (currentQuestion.value < questions.value.length - 1) {
-// 		currentQuestion.value++
-// 		return value
-// 	}
-	
-// 	quizCompleted.value = true
-// }
 
- const getQuestion=computed(()=>{
-    let question = questions.value[currentQuestion.value];
-    question.index = currentQuestion.value;
-    return question;    
-    
-})
+
 
 
 </script>
 
-<style>
+<style scoped>
+*{
+    margin: 3%;
+    align-items: center;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background-color: #d8c6f0;
+    color: rgb(0, 0, 0);
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+.quiz {
+    background-color: #dcc5fc;
+    padding: 1rem;
+    width: 100%;
+    max-width: 640px;
+}
+
+
+.option {
+    padding: 1rem;
+    display: block;
+    background-color: #c7adeb;
+    margin-bottom: 0.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+
+
+.option.correct {
+    background-color: #2cce7d;
+}
+
+.option.wrong {
+    background-color: #ff5a5f;
+}
+
+.option:last-of-type {
+    margin-bottom: 0;
+}
+
+.option.disabled {
+    opacity: 0.5;
+}
+/* 
+.option input {
+    display: none;
+} */
+
+button {
+    appearance: none;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    background-color: #2cce7d;
+    color: #2d213f;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    border-radius: 0.5rem;
+}
+
+button:disabled {
+    opacity: 0.5;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
 
 </style>

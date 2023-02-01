@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import {addQuiz} from '../../service'
 export default {
     data() {
         return {
@@ -32,14 +33,22 @@ export default {
     },
     methods: {
         addQuiz() {
-            const payload = {
+            const quiz = {
                 question: this.question,
                 option_1: this.option_1,
                 option_2: this.option_2,
                 option_3: this.option_3,
                 answer: this.answer
             }
-            console.log(payload)
+            
+
+            addQuiz(quiz).then((response)=>{
+             //   this..push(data);
+                console.log("heree")
+                console.log(response)
+
+
+            })
         }
     }
 }

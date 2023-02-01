@@ -10,3 +10,17 @@ export async function login(user) {
         console.log('err', err);
     }
 }
+
+export async function addQuiz(quiz) {
+  try {
+    const response= await axios.post('http://localhost:3000/add', quiz);
+    console.log("Here in services")
+
+    return response.data;
+
+
+  } catch (err) {
+      console.log('err', err);
+  }
+}
+

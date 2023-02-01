@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const bodyparser = require("body-parser");
 const { response } = require("express");
+const pool = require("./db");
 
 
 
@@ -29,7 +30,23 @@ app.use(function (req, res, next) {
 })
 
 
+app.post('/add', async (req, res) => {
+  try {
+    console.log("In app.js")
+    const question = req.body.question;
+    const answer = req.body.answer;
+    const option_1 = req.body.option_1;
+    const option_2 = req.body.option_2;
+    const option_3 = req.body.option_3;
+    const new_ques = await pool.query("INSERT INTO question VALUES ($1,$2,$3,$4,$5) RETURNING * ", [question, option_1, option_2, option_3, answer])
+    res.json("Insert Successful")
+  } catch (err) {
+    console.log(err.message);
+  }
 
+}
+
+)
 
 
 app.post('/', (req, res) => {
