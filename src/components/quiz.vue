@@ -2,37 +2,38 @@
   <div>
     <h4>Quiz App</h4>
     <section class="quiz">
-      <div class="quiz_info">
+      <label v-for="question in questions" :key="question.ques">
+        <p class="question">{{ question.ques }}</p>
         <div class="option">
-          <label v-for="question in questions" :key="question.ques">
-            <span>{{ question.ques }}</span>
+          <input
+            type="radio"
+            v-model="question.answer"
+            v-bind:value="question.option1"
+          />{{ question.option1 }}
 
-            <input
-              type="radio"
-              v-model="question.answer"
-              v-bind:value="question.option1"
-            />{{ question.option1 }}
+          <input
+            type="radio"
+            v-model="question.answer"
+            v-bind:value="question.option2"
+          />{{ question.option2 }}
 
-            <input
-              type="radio"
-              v-model="question.answer"
-              v-bind:value="question.option2"
-            />{{ question.option2 }}
-
-            <input
-              type="radio"
-              v-model="question.answer"
-              v-bind:value="question.option3"
-            />{{ question.option3 }}
-            <button class="btn btn-submit" v-on:click="submit(question)">Submit</button>
-          </label>
+          <input
+            type="radio"
+            v-model="question.answer"
+            v-bind:value="question.option3"
+          />{{ question.option3 }}
         </div>
-        <button class="btn btn-info" v-on:click="next">Next</button>
-        <button class="btn btn-primary" v-on:click="res()">
-          Result
+
+        <button class="btn btn-dark" v-on:click="submit(question)">
+          Submit
         </button>
-        <label v-if="show">Score: {{ score }}</label>
+      </label>
+      <div>
+        <button class="btn btn-info" v-on:click="next">Next</button>
+        <button class="btn btn-primary" v-on:click="res()">Result</button>
       </div>
+
+      <label v-if="show">Score: {{ score }}/{{ questions.length  }}</label>
     </section>
   </div>
 </template>
@@ -42,7 +43,7 @@ import { display } from "../../service";
 export default {
   data() {
     return {
-        currentQuestionIndex: 0,
+      currentQuestionIndex: 0,
       questions: [],
       score: 0,
       ques: {},
@@ -51,24 +52,22 @@ export default {
     };
   },
   computed: {
-  currentQuestion() {
-    return this.questions[this.currentQuestionIndex];
-  }},
+    currentQuestion() {
+      return this.questions[this.currentQuestionIndex];
+    },
+  },
   methods: {
     next() {
-      this.currentQuestionIndex =
-        (this.currentQuestionIndex + 1) % this.questions.length;
+      this.currentQuestionIndex = this.currentQuestionIndex + 1;
     },
-    submit(question){
-        if (question.actualans == question.answer) {
+    submit(question) {
+      if (question.actualans == question.answer) {
         this.score++;
         console.log(this.score);
       }
     },
-     
 
     res() {
-        
       this.show = true;
       this.result = {
         score: this.score,
@@ -89,15 +88,19 @@ export default {
   align-items: center;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Montsrrat", sans-serif;
 }
+.question{
+    width: 100%;
 
+}
 body {
   background-color: #d8c6f0;
   color: rgb(0, 0, 0);
 }
 
-h1 {
+h4{
+  margin-left: 45%;
   font-size: 2rem;
   margin-bottom: 2rem;
 }
@@ -106,7 +109,8 @@ h1 {
   background-color: #dcc5fc;
   padding: 1rem;
   width: 100%;
-  max-width: 640px;
+  max-width: 40%;
+  margin-left: 30%;
 }
 
 .option {
@@ -116,18 +120,8 @@ h1 {
   margin-bottom: 0.5rem;
   border-radius: 0.5rem;
   cursor: pointer;
-}
-
-.option.correct {
-  background-color: #2cce7d;
-}
-
-.option.wrong {
-  background-color: #ff5a5f;
-}
-
-.option:last-of-type {
-  margin-bottom: 0;
+  width: 140%;
+  flex-direction: column;
 }
 
 .option.disabled {
@@ -142,13 +136,12 @@ h1 {
 button {
   cursor: pointer;
   padding: 0.5rem 1rem;
-  background-color: #2cce7d;
+  background-color: #b272fc;
   color: #2d213f;
   font-weight: 700;
-  text-transform: uppercase;
-  font-size: 1.2rem;
+  font-size: 1rem;
   border-radius: 0.5rem;
-  width: 20%;
+  width: 30%;
 }
 
 button:disabled {
