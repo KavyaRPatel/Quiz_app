@@ -52,7 +52,10 @@ res.json(ques.rows)
 
 })
 
-
+const credential={
+  username: 'admin',
+  password: 'admin'
+}
 
 
 app.post('/', (req, res) => {
