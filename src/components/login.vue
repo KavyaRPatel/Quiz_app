@@ -56,7 +56,6 @@ export default {
         username: this.username,
         password: this.password,
       };
-      //console.log(user);
 
       login(user).then(
         (response) => {

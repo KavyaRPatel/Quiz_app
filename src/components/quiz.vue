@@ -4,6 +4,7 @@
     <section class="quiz">
       <label v-for="question in questions" :key="question.ques">
         <p class="question">{{ question.ques }}</p>
+
         <div class="option">
           <input
             type="radio"
@@ -23,17 +24,16 @@
             v-bind:value="question.option3"
           />{{ question.option3 }}
         </div>
-
         <button class="btn btn-dark" v-on:click="submit(question)">
           Submit
         </button>
       </label>
+
       <div>
-        <button class="btn btn-info" v-on:click="next">Next</button>
+        <!-- // <button class="btn btn-info" v-on:click="next">Next</button> -->
         <button class="btn btn-primary" v-on:click="res()">Result</button>
       </div>
-
-      <label v-if="show">Score: {{ score }}/{{ questions.length  }}</label>
+      <label v-if="show">Score: {{ score }}/{{ questions.length }}</label>
     </section>
   </div>
 </template>
@@ -51,15 +51,18 @@ export default {
       show: false,
     };
   },
-  computed: {
-    currentQuestion() {
-      return this.questions[this.currentQuestionIndex];
-    },
-  },
+  // computed: {
+  //   currentQuestion() {
+  //     return this.questions[this.currentQuestionIndex];
+  //   },
+  // },
   methods: {
-    next() {
-      this.currentQuestionIndex = this.currentQuestionIndex + 1;
-    },
+    // next() {
+    //   this.currentQuestionIndex = this.currentQuestionIndex + 1;
+    // },
+    // prev() {
+    //   this.currentQuestionIndex = this.currentQuestionIndex - 1;
+    // },
     submit(question) {
       if (question.actualans == question.answer) {
         this.score++;
@@ -90,16 +93,15 @@ export default {
   box-sizing: border-box;
   font-family: "Montsrrat", sans-serif;
 }
-.question{
-    width: 100%;
-
+.question {
+  width: 100%;
 }
 body {
   background-color: #d8c6f0;
   color: rgb(0, 0, 0);
 }
 
-h4{
+h4 {
   margin-left: 45%;
   font-size: 2rem;
   margin-bottom: 2rem;
@@ -108,7 +110,7 @@ h4{
 .quiz {
   background-color: #dcc5fc;
   padding: 1rem;
-  width: 100%;
+  width: 120%;
   max-width: 40%;
   margin-left: 30%;
 }
@@ -120,7 +122,8 @@ h4{
   margin-bottom: 0.5rem;
   border-radius: 0.5rem;
   cursor: pointer;
-  width: 140%;
+  width: 120%;
+  align-items: center;
   flex-direction: column;
 }
 

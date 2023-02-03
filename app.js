@@ -62,8 +62,8 @@ app.post('/', (req, res) => {
   try {
     const name = req.body.username
     const password = req.body.password
-    console.log(name, password) //works
-    // res.send('good')
+    console.log(name, password) 
+    
     if (name == credential.username && password == credential.password) {
       const token = jwt.sign({ name: name }, 'secretkey');
       res.status(200).json({
@@ -85,26 +85,26 @@ app.post('/', (req, res) => {
 
 })
 
-app.use((req, res, next) => {
-  const token = req.headers["authorization"];
+// app.use((req, res, next) => {
+//   const token = req.headers["authorization"];
 
-  if (token) {
-    jwt.verify(token, 'secetKey', (error, decoded) => {
-      if (error) {
-        return res.status(401).json({
-          message: "Unauthorized"
-        });
-      }
+//   if (token) {
+//     jwt.verify(token, 'secetKey', (error, decoded) => {
+//       if (error) {
+//         return res.status(401).json({
+//           message: "Unauthorized"
+//         });
+//       }
 
-      req.user = decoded;
-      next();
-    });
-  } else {
-    return res.status(401).json({
-      message: "Unauthorized"
-    });
-  }
-});
+//       req.user = decoded;
+//       next();
+//     });
+//   } else {
+//     return res.status(401).json({
+//       message: "Unauthorized"
+//     });
+//   }
+// });
 
 
 

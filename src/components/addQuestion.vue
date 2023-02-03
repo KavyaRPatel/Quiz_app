@@ -32,6 +32,13 @@ export default {
 
     },
     methods: {
+        clearForm(){
+           this.question= '',
+           this.option_1= '',
+           this.option_2= '',
+           this.option_3= ''
+
+        },
         addQuiz() {
             const quiz = {
                 question: this.question,
@@ -40,16 +47,16 @@ export default {
                 option_3: this.option_3,
                 answer: this.answer
             }
-            
+            this.clearForm();
 
             addQuiz(quiz).then((response)=>{
-             //   this..push(data);
                 console.log("heree")
                 console.log(response)
 
 
             })
-        }
+        },
+       
     }
 }
 </script>
